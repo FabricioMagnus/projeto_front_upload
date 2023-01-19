@@ -37,6 +37,7 @@
       file = input;
       text = input.name;
     }}
+    on:click={() => document.querySelector("input[type='file']").click()}
   >
     <p>{text}</p>
   </div>
@@ -54,6 +55,10 @@
     border: 2px dashed gray;
     padding: 1rem;
     text-align: center;
+    border-radius: 15px;
+    align-items: center;
+    width: 40vw;
+    height: 15vh;
   }
   button {
     margin-top: "120px";
