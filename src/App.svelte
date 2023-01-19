@@ -10,7 +10,14 @@
   onMount(async () => {
     const input = document.querySelector("input[type='file']");
     input.addEventListener("change", async (event) => {
-      file = event.target.files[0];
+      const file = event.target.files[0];
+      if (
+        file.type !==
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      ) {
+        text = "Por favor, selecione um arquivo xlsx válido";
+        return;
+      }
       text = file.name;
     });
   });
@@ -33,9 +40,15 @@
     on:dragover={(event) => event.preventDefault()}
     on:drop={(event) => {
       event.preventDefault();
-      const input = event.dataTransfer.items[0].getAsFile();
-      file = input;
-      text = input.name;
+      const file = event.dataTransfer.items[0].getAsFile();
+      if (
+        file.type !==
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      ) {
+        text = "Por favor, selecione um arquivo xlsx válido";
+        return;
+      }
+      text = file.name;
     }}
     on:click={() => document.querySelector("input[type='file']").click()}
   >
