@@ -39,14 +39,15 @@
   }
 
   async function logout() {
+    localStorage.removeItem("token");
     navigateTo("/login");
   }
 </script>
 
 <div style="position: absolute; top: 0; right: 0;">
-  <button style="margin-top: 50px; margin-right: 60px;" on:click={logout}
-    >Sair</button
-  >
+  <button style="margin-top: 50px; margin-right: 60px;" on:click={logout}>
+    Sair
+  </button>
 </div>
 
 <div>
@@ -77,9 +78,9 @@
     bind:value={file}
     on:change={uploadFile}
   />
-  <button disabled={isValid} style="margin-top: 30px;" on:click={uploadFile}
-    >Enviar</button
-  >
+  <button disabled={isValid} style="margin-top: 30px;" on:click={uploadFile}>
+    Enviar
+  </button>
 </div>
 
 <style>

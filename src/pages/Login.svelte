@@ -1,4 +1,6 @@
 <script>
+  // @ts-nocheck
+
   import Login from "../services/loginApi";
   import { navigateTo } from "svelte-router-spa";
 
@@ -8,6 +10,7 @@
   $: formIsValid = email != "" && password != "";
 
   async function handleSubmit() {
+    window.localStorage.setItem("token", "UHGAUGSIUYGSOUGSPOUGHS");
     // const obj = {
     //   email: email,
     //   pwd: password,
@@ -22,6 +25,15 @@
     // }
     navigateTo("/upload");
   }
+
+  function myFunction() {
+    var x = document.getElementById("myInput");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
 </script>
 
 <div class="container">
@@ -32,13 +44,32 @@
     </label>
     <label>
       Senha:
-      <input type="password" bind:value={password} />
+      <input type="password" id="myInput" bind:value={password} />
     </label>
+    <div class="checkbox-input">
+      <input type="checkbox" class={"checkbox"} on:click={myFunction} />
+      <p>Mostrar Senha</p>
+    </div>
     <button disabled={!formIsValid} type="submit">Acessar</button>
   </form>
 </div>
 
 <style>
+  .checkbox {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+  }
+  .checkbox-input {
+    /* background-color: red; */
+    width: fit-content;
+    height: 40px;
+    align-items: center;
+    margin-top: -35px;
+    margin-bottom: -25px;
+    display: flex;
+    flex-direction: row;
+  }
   .container {
     display: flex;
     justify-content: center;
