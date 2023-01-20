@@ -2,10 +2,11 @@
   // @ts-nocheck
 
   import { onMount } from "svelte";
-  // import axios from "axios";
+  import Upload from "./services/upload_File";
 
   let file;
   let text = "Arraste e solte o arquivo aqui";
+  let isValid = true;
 
   onMount(async () => {
     const input = document.querySelector("input[type='file']");
@@ -16,8 +17,10 @@
         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
       ) {
         text = "Por favor, selecione um arquivo xlsx válido";
+        isValid = true;
         return;
       }
+      isValid = false;
       text = file.name;
     });
   });
@@ -26,8 +29,8 @@
     const formData = new FormData();
     formData.append("file", file);
     try {
-      // const response = await axios.post("/api/upload", formData);
-      // console.log(response.data);
+      const response = await Upload.uploadFile(formData);
+      console.log(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -35,6 +38,7 @@
 </script>
 
 <div>
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
   <div
     id="drop-area"
     on:dragover={(event) => event.preventDefault()}
@@ -60,7 +64,9 @@
     bind:value={file}
     on:change={uploadFile}
   />
-  <button style="margin-top: 30px;" on:click={uploadFile}>Enviar</button>
+  <button disabled={isValid} style="margin-top: 30px;" on:click={uploadFile}
+    >Enviar</button
+  >
 </div>
 
 <style>
