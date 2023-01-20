@@ -3,6 +3,8 @@
 
   import { onMount } from "svelte";
   import Upload from "../services/upload_File";
+  import { slide } from "svelte/transition";
+  import { navigateTo } from "svelte-router-spa";
 
   let file;
   let text = "Arraste e solte o arquivo aqui";
@@ -35,12 +37,23 @@
       console.error(error);
     }
   }
+
+  async function logout() {
+    navigateTo("/login");
+  }
 </script>
+
+<div style="position: absolute; top: 0; right: 0;">
+  <button style="margin-top: 50px; margin-right: 60px;" on:click={logout}
+    >Logout</button
+  >
+</div>
 
 <div>
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <div
     id="drop-area"
+    in:slide={{ duration: 2000 }}
     on:dragover={(event) => event.preventDefault()}
     on:drop={(event) => {
       event.preventDefault();
@@ -77,7 +90,7 @@
     border-radius: 15px;
     align-items: center;
     width: 40vw;
-    height: 15vh;
+    height: 20vh;
   }
   button {
     margin-top: "120px";

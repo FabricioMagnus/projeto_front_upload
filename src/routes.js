@@ -3,7 +3,7 @@ import Login from "./pages/Login.svelte";
 
 function isUserLogged() {
   const token = localStorage.getItem("token");
-  if (token) {
+  if (!token) {
     return true;
   } else {
     return false;
