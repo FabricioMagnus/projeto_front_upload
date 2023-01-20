@@ -72,15 +72,8 @@
     height: 100%;
   }
   button {
-    background-color: #590091;
-    color: white;
-    padding: 8px 16px;
-    border-radius: 10px;
-    border: none;
-    font-size: 1rem;
     width: 80%;
     height: 6vh;
-    cursor: pointer;
   }
   input {
     width: 100%;
