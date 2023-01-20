@@ -45,7 +45,7 @@
 
 <div style="position: absolute; top: 0; right: 0;">
   <button style="margin-top: 50px; margin-right: 60px;" on:click={logout}
-    >Logout</button
+    >Sair</button
   >
 </div>
 

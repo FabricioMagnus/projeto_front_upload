@@ -34,7 +34,7 @@
       Senha:
       <input type="password" bind:value={password} />
     </label>
-    <button disabled={!formIsValid} type="submit">Login</button>
+    <button disabled={!formIsValid} type="submit">Acessar</button>
   </form>
 </div>
 
