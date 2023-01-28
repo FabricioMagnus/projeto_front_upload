@@ -13,23 +13,23 @@
   onMount(async () => {
     const input = document.querySelector("input[type='file']");
     input.addEventListener("change", async (event) => {
-      const file = event.target.files[0];
-      if (
-        file.type !==
-        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-      ) {
-        text = "Por favor, selecione um arquivo xlsx válido";
-        isValid = true;
-        return;
-      }
+      file = event.target.files;
+      // if (
+      //   file.type !==
+      //   "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      // ) {
+      //   text = "Por favor, selecione um arquivo xlsx válido";
+      //   isValid = true;
+      //   return;
+      // }
       isValid = false;
-      text = file.name;
+      text = file[0].name;
     });
   });
 
   async function uploadFile() {
     const formData = new FormData();
-    formData.append("file", file);
+    formData.append("file", file[0]);
     try {
       const response = await Upload.uploadFile(formData);
       console.log(response.data);
@@ -37,6 +37,8 @@
       console.error(error);
     }
   }
+
+  $: console.log("file", file);
 
   async function logout() {
     localStorage.removeItem("token");
@@ -55,29 +57,12 @@
   <div
     id="drop-area"
     in:slide={{ duration: 2000 }}
-    on:dragover={(event) => event.preventDefault()}
-    on:drop={(event) => {
-      event.preventDefault();
-      const file = event.dataTransfer.items[0].getAsFile();
-      if (
-        file.type !==
-        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-      ) {
-        text = "Por favor, selecione um arquivo xlsx válido";
-        return;
-      }
-      text = file.name;
-    }}
+    on:dragover|preventDefault
     on:click={() => document.querySelector("input[type='file']").click()}
   >
     <p>{text}</p>
   </div>
-  <input
-    type="file"
-    style="display:none"
-    bind:value={file}
-    on:change={uploadFile}
-  />
+  <input type="file" style="display:none" bind:value={file} />
   <button disabled={isValid} style="margin-top: 30px;" on:click={uploadFile}>
     Enviar
   </button>

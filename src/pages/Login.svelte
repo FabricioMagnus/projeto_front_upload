@@ -10,19 +10,19 @@
   $: formIsValid = email != "" && password != "";
 
   async function handleSubmit() {
-    window.localStorage.setItem("token", "UHGAUGSIUYGSOUGSPOUGHS");
-    // const obj = {
-    //   email: email,
-    //   pwd: password,
-    // };
-    // try {
-    //   const response = await Login.login(obj);
-    //   window.localStorage.setItem("token", response.token);
-    // } catch (error) {
-    //   alert("E-mail ou senhas inválidos!");
-    //   error = true;
-    //   console.log("error: ", error);
-    // }
+    // window.localStorage.setItem("token", "UHGAUGSIUYGSOUGSPOUGHS");
+    const obj = {
+      username: email,
+      password: password,
+    };
+    try {
+      const response = await Login.login(obj);
+      window.localStorage.setItem("token", response.token);
+    } catch (error) {
+      alert("E-mail ou senhas inválidos!");
+      error = true;
+      console.log("error: ", error);
+    }
     navigateTo("/upload");
   }
 
@@ -40,7 +40,7 @@
   <form on:submit|preventDefault={handleSubmit}>
     <label>
       Email:
-      <input type="email" bind:value={email} />
+      <input type="text" bind:value={email} />
     </label>
     <label>
       Senha:
