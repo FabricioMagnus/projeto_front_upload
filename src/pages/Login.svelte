@@ -38,6 +38,10 @@
 
 <div class="container">
   <form on:submit|preventDefault={handleSubmit}>
+    <img
+      src="http://creditoreal.softkuka.com.br/logo.png"
+      alt="logo credito real"
+    />
     <label>
       Email:
       <input type="text" bind:value={email} />
@@ -55,6 +59,9 @@
 </div>
 
 <style>
+  img {
+    width: 16vw;
+  }
   .checkbox {
     width: 20px;
     height: 20px;
@@ -83,7 +90,7 @@
     padding: 20px;
     border-radius: 10px;
     width: 30vw;
-    height: 45vh;
+    height: 55vh;
     filter: blur();
     backdrop-filter: "auto";
   }
