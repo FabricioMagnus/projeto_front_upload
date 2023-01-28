@@ -1,6 +1,6 @@
 import Axios from "axios";
 
-export const baseURL = "https://skproducao.com/crealupload/xlsx";
+export const baseURL = "https://teste.com.br/api";
 
 const api = Axios.create({
   baseURL,
