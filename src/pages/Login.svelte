@@ -43,7 +43,7 @@
       alt="logo credito real"
     />
     <label>
-      Email:
+      Usuário:
       <input type="text" bind:value={email} />
     </label>
     <label>
